@@ -15,11 +15,12 @@ url_page = '#p1_default_desc/'
 
 bot = telebot.TeleBot(token)
 
+
 def load():
-    with open('data.json', 'r', encoding='utf-8') as file:
+    with open('data/data.json', 'r', encoding='utf-8') as file:
         src = json.load(file)
         file.close()
-    return src 
+    return src
 
 
 def save():
@@ -34,11 +35,11 @@ def make_request(message):
     link = url + url_search + item
     req = requests.get(link)
 
-    with open(f'index.html', 'w', encoding='utf-8') as file:
+    with open(f'html/index.html', 'w', encoding='utf-8') as file:
         file.write(req.text)
         file.close()
 
-    with open(f'index.html', 'r', encoding='utf-8') as file:
+    with open(f'html/index.html', 'r', encoding='utf-8') as file:
         src = file.read()
         file.close()
 
@@ -67,7 +68,7 @@ data = load()
 
 @bot.message_handler(commands=['start', 'help'])
 def start(message):
-    
+
     bot.send_message(
         message.chat.id, 'Hi! This bot can track prices for the items on the Steam market place. Just write name of the item in English to start tracking it.')
 
